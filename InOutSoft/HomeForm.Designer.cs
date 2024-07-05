@@ -34,13 +34,16 @@
             this.btnList = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblType = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtAveria = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtnota = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
@@ -53,13 +56,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblType = new System.Windows.Forms.Label();
             this.lblTypeTitle = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblHora = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblTel2 = new System.Windows.Forms.Label();
+            this.lblTel1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblDir = new System.Windows.Forms.Label();
+            this.lblLogo = new System.Windows.Forms.Label();
+            this.lblrnc = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -67,41 +74,54 @@
             // 
             // btnIn
             // 
+            this.btnIn.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.ForeColor = System.Drawing.Color.White;
             this.btnIn.Location = new System.Drawing.Point(73, 45);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(235, 58);
             this.btnIn.TabIndex = 0;
             this.btnIn.Text = "Generar Entrada";
-            this.btnIn.UseVisualStyleBackColor = true;
+            this.btnIn.UseVisualStyleBackColor = false;
             this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
             // 
             // btnOut
             // 
+            this.btnOut.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOut.ForeColor = System.Drawing.Color.White;
             this.btnOut.Location = new System.Drawing.Point(73, 159);
             this.btnOut.Name = "btnOut";
             this.btnOut.Size = new System.Drawing.Size(235, 58);
             this.btnOut.TabIndex = 1;
             this.btnOut.Text = "Generar Salida";
-            this.btnOut.UseVisualStyleBackColor = true;
+            this.btnOut.UseVisualStyleBackColor = false;
             this.btnOut.Click += new System.EventHandler(this.btnOut_Click);
             // 
             // btnList
             // 
+            this.btnList.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnList.ForeColor = System.Drawing.Color.White;
             this.btnList.Location = new System.Drawing.Point(73, 273);
             this.btnList.Name = "btnList";
             this.btnList.Size = new System.Drawing.Size(235, 58);
             this.btnList.TabIndex = 2;
             this.btnList.Text = "Ver Listado";
-            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.UseVisualStyleBackColor = false;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Location = new System.Drawing.Point(401, 52);
+            this.panel1.Location = new System.Drawing.Point(421, 62);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(678, 539);
             this.panel1.TabIndex = 3;
@@ -118,6 +138,21 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Lista de Reparaciones";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SpringGreen;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(534, 472);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 46);
+            this.button1.TabIndex = 96;
+            this.button1.Text = "Registrar ";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox4
             // 
@@ -149,6 +184,19 @@
             this.groupBox4.TabIndex = 94;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Datos de Telefono";
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.BackColor = System.Drawing.Color.Transparent;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.ForeColor = System.Drawing.Color.Black;
+            this.lblType.Location = new System.Drawing.Point(370, 187);
+            this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(16, 16);
+            this.lblType.TabIndex = 98;
+            this.lblType.Text = "...";
             // 
             // txtTelefono
             // 
@@ -212,6 +260,19 @@
             this.label1.Size = new System.Drawing.Size(52, 18);
             this.label1.TabIndex = 92;
             this.label1.Text = "Averia:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(239, 187);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(102, 16);
+            this.label11.TabIndex = 91;
+            this.label11.Text = "Tipo de trabajo:";
             // 
             // txtnota
             // 
@@ -342,39 +403,13 @@
             this.dtpFecha.Size = new System.Drawing.Size(196, 24);
             this.dtpFecha.TabIndex = 0;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(239, 187);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(102, 16);
-            this.label11.TabIndex = 91;
-            this.label11.Text = "Tipo de trabajo:";
-            // 
-            // lblType
-            // 
-            this.lblType.AutoSize = true;
-            this.lblType.BackColor = System.Drawing.Color.Transparent;
-            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.ForeColor = System.Drawing.Color.Black;
-            this.lblType.Location = new System.Drawing.Point(370, 187);
-            this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(16, 16);
-            this.lblType.TabIndex = 98;
-            this.lblType.Text = "...";
-            // 
             // lblTypeTitle
             // 
             this.lblTypeTitle.AutoSize = true;
-            this.lblTypeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTypeTitle.Location = new System.Drawing.Point(705, 9);
+            this.lblTypeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTypeTitle.Location = new System.Drawing.Point(626, 20);
             this.lblTypeTitle.Name = "lblTypeTitle";
-            this.lblTypeTitle.Size = new System.Drawing.Size(68, 29);
+            this.lblTypeTitle.Size = new System.Drawing.Size(72, 29);
             this.lblTypeTitle.TabIndex = 50;
             this.lblTypeTitle.Text = "Type";
             // 
@@ -388,7 +423,7 @@
             this.lblHora.BackColor = System.Drawing.Color.Transparent;
             this.lblHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora.ForeColor = System.Drawing.Color.Teal;
-            this.lblHora.Location = new System.Drawing.Point(95, 472);
+            this.lblHora.Location = new System.Drawing.Point(89, 572);
             this.lblHora.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lblHora.Name = "lblHora";
             this.lblHora.Size = new System.Drawing.Size(170, 28);
@@ -400,32 +435,103 @@
             this.lblFecha.BackColor = System.Drawing.Color.Transparent;
             this.lblFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFecha.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblFecha.Location = new System.Drawing.Point(95, 434);
+            this.lblFecha.Location = new System.Drawing.Point(89, 534);
             this.lblFecha.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(170, 28);
             this.lblFecha.TabIndex = 51;
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // lblTel2
             // 
-            this.button1.BackColor = System.Drawing.Color.SpringGreen;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(534, 472);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 46);
-            this.button1.TabIndex = 96;
-            this.button1.Text = "Registrar ";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.lblTel2.AutoSize = true;
+            this.lblTel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTel2.ForeColor = System.Drawing.Color.Black;
+            this.lblTel2.Location = new System.Drawing.Point(339, 439);
+            this.lblTel2.Name = "lblTel2";
+            this.lblTel2.Size = new System.Drawing.Size(28, 16);
+            this.lblTel2.TabIndex = 57;
+            this.lblTel2.Text = "tel2";
+            // 
+            // lblTel1
+            // 
+            this.lblTel1.AutoSize = true;
+            this.lblTel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTel1.ForeColor = System.Drawing.Color.Black;
+            this.lblTel1.Location = new System.Drawing.Point(209, 439);
+            this.lblTel1.Name = "lblTel1";
+            this.lblTel1.Size = new System.Drawing.Size(28, 16);
+            this.lblTel1.TabIndex = 56;
+            this.lblTel1.Text = "tel1";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(30, 439);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(128, 16);
+            this.label14.TabIndex = 55;
+            this.label14.Text = "Numero Telefonico :";
+            // 
+            // lblDir
+            // 
+            this.lblDir.AutoSize = true;
+            this.lblDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDir.ForeColor = System.Drawing.Color.Black;
+            this.lblDir.Location = new System.Drawing.Point(59, 412);
+            this.lblDir.Name = "lblDir";
+            this.lblDir.Size = new System.Drawing.Size(22, 16);
+            this.lblDir.TabIndex = 54;
+            this.lblDir.Text = "dir";
+            // 
+            // lblLogo
+            // 
+            this.lblLogo.AutoSize = true;
+            this.lblLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogo.ForeColor = System.Drawing.Color.Black;
+            this.lblLogo.Location = new System.Drawing.Point(131, 380);
+            this.lblLogo.Name = "lblLogo";
+            this.lblLogo.Size = new System.Drawing.Size(61, 29);
+            this.lblLogo.TabIndex = 53;
+            this.lblLogo.Text = "logo";
+            // 
+            // lblrnc
+            // 
+            this.lblrnc.AutoSize = true;
+            this.lblrnc.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrnc.ForeColor = System.Drawing.Color.Black;
+            this.lblrnc.Location = new System.Drawing.Point(209, 464);
+            this.lblrnc.Name = "lblrnc";
+            this.lblrnc.Size = new System.Drawing.Size(25, 16);
+            this.lblrnc.TabIndex = 58;
+            this.lblrnc.Text = "rnc";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(30, 464);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(112, 16);
+            this.label10.TabIndex = 59;
+            this.label10.Text = "Numero de RNC :";
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1120, 623);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblrnc);
+            this.Controls.Add(this.lblTel2);
+            this.Controls.Add(this.lblTel1);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.lblDir);
+            this.Controls.Add(this.lblLogo);
             this.Controls.Add(this.lblHora);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblTypeTitle);
@@ -480,6 +586,13 @@
         private System.Windows.Forms.Label lblHora;
         public System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Label lblTel2;
+        public System.Windows.Forms.Label lblTel1;
+        private System.Windows.Forms.Label label14;
+        public System.Windows.Forms.Label lblDir;
+        public System.Windows.Forms.Label lblLogo;
+        public System.Windows.Forms.Label lblrnc;
+        private System.Windows.Forms.Label label10;
     }
 }
 

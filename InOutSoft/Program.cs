@@ -19,7 +19,9 @@ namespace InOutSoft
             Application.Run(new HomeForm());
         }
 
-
+        public static int Id;
+        public static string descripcion;
+        public static string ImpresonaPeq;
         public static string connectionString;
 
         public static SqlConnection conection()
