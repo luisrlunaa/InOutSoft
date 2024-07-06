@@ -9,9 +9,24 @@ namespace InOutSoft
 {
     public partial class HomeForm : Form
     {
+        ConnectionCx connectionCx = new ConnectionCx();
+        public static HomeForm Instance;
+        public int idreparacion;
+        public string descripcion;
+        public string cliente;
+        public string averia;
+        public string tipoDeTrabajo;
+        public string datos;
+        public string marca;
+        public string fecha;
+        public string precio;
+        public string nota;
+
         public HomeForm()
         {
             InitializeComponent();
+            connectionCx.connection();
+            Instance = this;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -54,7 +69,7 @@ namespace InOutSoft
 
         private void HomeForm_Load(object sender, System.EventArgs e)
         {
-            //llenar();
+            llenar();
             this.Size = new Size(332, 610);
         }
 
@@ -69,61 +84,75 @@ namespace InOutSoft
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Program.Desconectar();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtCliente.Text)) { MessageBox.Show("Es importante y obligatorio introducir el nombre del cliente"); return; }
+                if (string.IsNullOrWhiteSpace(txtTelefono.Text)) { MessageBox.Show("Es importante y obligatorio introducir el numero de telefono del cliente"); return; }
+                if (string.IsNullOrWhiteSpace(txtMarca.Text)) { MessageBox.Show("Es importante y obligatorio introducir la marca del equipo"); return; }
+                if (string.IsNullOrWhiteSpace(txtImei.Text)) { MessageBox.Show("Es importante y obligatorio introducir el iemi del equipo para evitar reclamos de confusion"); return; }
+                if (string.IsNullOrWhiteSpace(txtModelo.Text)) { MessageBox.Show("Es importante y obligatorio introducir el modelo del equipo"); return; }
+                if (string.IsNullOrWhiteSpace(txtAveria.Text)) { MessageBox.Show("Es importante y obligatorio introducir el tipo de problema con que llego el equipo a la tienda"); return; }
+                if (string.IsNullOrWhiteSpace(txtprecio.Text)) { MessageBox.Show("Es importante y obligatorio introducir el precio de la reparacion"); return; }
 
-            if (Program.Id > 0 && Program.descripcion.ToLower() == "salida")
-            {
-                tickEstiloP();
-            }
-            else
-            {
-                using (SqlCommand cmd = new SqlCommand("Registrartaller", Program.conection()))
+                connectionCx.Disconnect();
+                if (idreparacion > 0 && descripcion.ToLower() == "salida")
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = Convert.ToInt32(Program.Id);
-                    cmd.Parameters.Add("@cliente", SqlDbType.NVarChar).Value = (txtCliente.Text + "." + txtTelefono.Text).ToLower();
-                    cmd.Parameters.Add("@averia", SqlDbType.NVarChar).Value = txtAveria.Text.ToLower();
-                    cmd.Parameters.Add("@tipoDeTrabajo", SqlDbType.VarChar).Value = lblType.Text;
-                    cmd.Parameters.Add("@Datos", SqlDbType.NVarChar).Value = (txtModelo.Text + "." + txtImei.Text).ToUpper();
-                    cmd.Parameters.Add("@Marca", SqlDbType.NVarChar).Value = txtMarca.Text;
-                    cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Convert.ToDateTime(dtpFecha.Text);
-                    cmd.Parameters.Add("@precio", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
-                    cmd.Parameters.Add("@nota", SqlDbType.NVarChar).Value = txtnota.Text;
-
-                    Program.Conectar();
-                    cmd.ExecuteNonQuery();
-                    Program.Desconectar();
-
-                    if (lblType.Text.ToLower() == "salida")
+                    tickEstiloP();
+                }
+                else
+                {
+                    using (SqlCommand cmd = new SqlCommand("Registrartaller", connectionCx.sqlConnection))
                     {
-                        using (SqlCommand cmd2 = new SqlCommand("pagos_re", Program.conection()))
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@id", SqlDbType.Int).Value = idreparacion;
+                        cmd.Parameters.Add("@cliente", SqlDbType.NVarChar).Value = (txtCliente.Text + '.' + txtTelefono.Text).ToLower();
+                        cmd.Parameters.Add("@averia", SqlDbType.NVarChar).Value = txtAveria.Text.ToLower();
+                        cmd.Parameters.Add("@tipoDeTrabajo", SqlDbType.VarChar).Value = lblType.Text.ToUpper();
+                        cmd.Parameters.Add("@Datos", SqlDbType.NVarChar).Value = (txtModelo.Text + '.' + txtImei.Text).ToUpper();
+                        cmd.Parameters.Add("@Marca", SqlDbType.NVarChar).Value = txtMarca.Text;
+                        cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Convert.ToDateTime(dtpFecha.Text).Date;
+                        cmd.Parameters.Add("@precio", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
+                        cmd.Parameters.Add("@nota", SqlDbType.NVarChar).Value = txtnota.Text;
+
+                        connectionCx.Connect();
+                        cmd.ExecuteNonQuery();
+                        connectionCx.Disconnect();
+
+                        if (lblType.Text.ToLower() == "salida")
                         {
-                            cmd2.CommandType = CommandType.StoredProcedure;
+                            using (SqlCommand cmd2 = new SqlCommand("pagos_re", connectionCx.sqlConnection))
+                            {
+                                cmd2.CommandType = CommandType.StoredProcedure;
 
-                            //Tabla de pago
-                            cmd2.Parameters.Add("@monto", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
-                            cmd2.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Convert.ToDateTime(dtpFecha.Text);
+                                //Tabla de pago
+                                cmd2.Parameters.Add("@id", SqlDbType.Int).Value = idreparacion;
+                                cmd2.Parameters.Add("@monto", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
 
-                            Program.Conectar(); ;
-                            cmd2.ExecuteNonQuery();
-                            Program.Desconectar();
+                                connectionCx.Connect();
+                                cmd2.ExecuteNonQuery();
+                                connectionCx.Disconnect();
 
+                                tickEstiloP();
+                                MessageBox.Show("Salida Registrada y Pago Confirmado");
+                            }
+                        }
+                        else
+                        {
                             tickEstiloP();
-                            MessageBox.Show("Salida Registrada y Pago Confirmado");
+                            MessageBox.Show("Guardado en el Taller");
                         }
                     }
-                    else
-                    {
-                        tickEstiloP();
-                        MessageBox.Show("Guardado en el Taller");
-                    }
-                }
 
-                clean();
+                    limpiar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public void tickEstiloP()
+        private void tickEstiloP()
         {
             CrearTiket ticket = new CrearTiket();
 
@@ -169,10 +198,10 @@ namespace InOutSoft
             ticket.TextoIzquierda("");
             ticket.TextoIzquierda("");
             ticket.CortaTicket();//CORTAR TICKET
-            ticket.ImprimirTicket(Program.ImpresonaPeq);//NOMBRE DE LA IMPRESORA
+            ticket.ImprimirTicket(Program.ImpressionPeq);//NOMBRE DE LA IMPRESORA
         }
 
-        public void clean()
+        private void limpiar()
         {
             txtTelefono.Clear();
             txtModelo.Clear();
@@ -182,26 +211,130 @@ namespace InOutSoft
             txtImei.Clear();
             txtCliente.Clear();
             txtAveria.Clear();
+            idreparacion = 0;
         }
 
-        public void llenar()
+        private void llenar()
         {
-            Program.Desconectar();
+            connectionCx.Disconnect();
             string cadSql = "select * from NomEmp";
-            SqlCommand comando = new SqlCommand(cadSql, Program.conection());
-            Program.Conectar();
+            SqlCommand comando = new SqlCommand(cadSql, connectionCx.sqlConnection);
+            connectionCx.Connect();
             SqlDataReader leer = comando.ExecuteReader();
             if (leer.Read())
             {
-                lblDir.Text = leer["DirEmp"].ToString();
-                lblLogo.Text = leer["NombreEmp"].ToString();
-                lblTel1.Text = leer["Tel1"].ToString();
-                lblTel2.Text = leer["Tel2"].ToString();
-                lblrnc.Text = leer["RNC"].ToString();
+                lblDir.Text = leer["DirEmp"].ToString() ?? string.Empty;
+                lblLogo.Text = leer["NombreEmp"].ToString() ?? "InOutSoft System";
+                lblTel1.Text = leer["Tel1"].ToString() ?? string.Empty;
+                lblTel2.Text = leer["Tel2"].ToString() ?? string.Empty;
+                lblrnc.Text = leer["RNC"].ToString() ?? string.Empty;
                 var impresoraPeq = leer["ImpresoraPeq"].ToString();
-                Program.ImpresonaPeq = string.IsNullOrWhiteSpace(impresoraPeq) ? "POS80 Printer" : impresoraPeq;
+                Program.ImpressionPeq = string.IsNullOrWhiteSpace(impresoraPeq) ? "POS80 Printer" : impresoraPeq;
             }
-            Program.Desconectar();
+            connectionCx.Disconnect();
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(332, 610);
+            PayListForm F = new PayListForm();
+            F.lblLogo.Text = lblLogo.Text;
+            F.lblDir.Text = lblDir.Text;
+            F.Show();
+        }
+
+        private void txtprecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsPunctuation(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsPunctuation(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PrintForm print = new PrintForm();
+            print.Show();
+        }
+
+        public void Refresh()
+        {
+            if (idreparacion > 0)
+            {
+                this.Size = new Size(1130, 670);
+                lblTypeTitle.Text = "Generar Salida";
+                lblType.Text = "Salida";
+                button1.Text = "Registrar";
+                button1.BackColor = Color.SpringGreen;
+                button1.ForeColor = Color.Black;
+
+                if (!string.IsNullOrWhiteSpace(cliente))
+                {
+                    txtCliente.Text = cliente.Split('.')[0];
+                    txtTelefono.Text = cliente.Split('.')[1];
+                }
+
+                txtAveria.Text = averia;
+                if (!string.IsNullOrWhiteSpace(datos))
+                {
+                    txtModelo.Text = datos.Split('.')[0];
+                    txtImei.Text = datos.Split('.')[1];
+                }
+
+                txtMarca.Text = marca;
+                dtpFecha.Text = fecha;
+                txtprecio.Text = precio;
+                txtnota.Text = nota;
+
+
+                // Perform any additional updates needed to refresh the form
+                this.Update();
+            }
         }
     }
 }
