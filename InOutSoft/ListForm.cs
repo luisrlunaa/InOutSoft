@@ -217,7 +217,7 @@ namespace InOutSoft
 
             cbtipo.DisplayMember = "descripcion";
             cbtipo.ValueMember = "id";
-            cbtipo.Items.Add(" ");
+            cbtipo.Items.Add("AMBOS");
             cbtipo.Items.Add("ENTRADA");
             cbtipo.Items.Add("SALIDA");
             cbtipo.SelectedIndex = 0;
@@ -245,6 +245,5 @@ namespace InOutSoft
             HomeForm.Instance.Refresh();
             this.Close();
         }
-
     }
 }
