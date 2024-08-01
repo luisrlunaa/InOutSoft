@@ -64,17 +64,30 @@
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListProducts.Designer.cs">
+      <DependentUpon>ListProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ListForm.Designer.cs">
       <DependentUpon>ListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Producto.cs" />
     <Compile Include="PayListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PayListForm.Designer.cs">
       <DependentUpon>PayListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForm.Designer.cs">
+      <DependentUpon>ProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintForm.cs">
       <SubType>Form</SubType>
@@ -87,11 +100,17 @@
     <EmbeddedResource Include="HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListProducts.resx">
+      <DependentUpon>ListProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListForm.resx">
       <DependentUpon>ListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PayListForm.resx">
       <DependentUpon>PayListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintForm.resx">
       <DependentUpon>PrintForm.cs</DependentUpon>
@@ -119,5 +138,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

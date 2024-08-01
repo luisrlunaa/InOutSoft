@@ -78,6 +78,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Name = "PrintForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.PrintForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

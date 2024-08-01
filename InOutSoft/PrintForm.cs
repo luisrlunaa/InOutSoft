@@ -11,6 +11,7 @@ namespace InOutSoft
         public PrintForm()
         {
             InitializeComponent();
+            connectionCx.connection();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace InOutSoft
 {
-    partial class ListForm
+    partial class ListProducts
     {
         /// <summary>
         /// Required designer variable.
@@ -29,66 +29,25 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpfecha2 = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.dtpfecha1 = new System.Windows.Forms.DateTimePicker();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txttotalG = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoDeTrabajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.averia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblDir = new System.Windows.Forms.Label();
             this.lblLogo = new System.Windows.Forms.Label();
-            this.cbtipo = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.idProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(608, 73);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 16);
-            this.label12.TabIndex = 150;
-            this.label12.Text = "Hasta:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(466, 73);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 16);
-            this.label5.TabIndex = 149;
-            this.label5.Text = "Desde :";
-            // 
-            // dtpfecha2
-            // 
-            this.dtpfecha2.CustomFormat = "";
-            this.dtpfecha2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpfecha2.Location = new System.Drawing.Point(611, 99);
-            this.dtpfecha2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpfecha2.Name = "dtpfecha2";
-            this.dtpfecha2.Size = new System.Drawing.Size(121, 22);
-            this.dtpfecha2.TabIndex = 148;
             // 
             // button2
             // 
@@ -101,7 +60,7 @@
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(526, 577);
+            this.button2.Location = new System.Drawing.Point(177, 472);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 40);
@@ -121,7 +80,7 @@
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(673, 578);
+            this.button3.Location = new System.Drawing.Point(470, 472);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(144, 39);
@@ -134,7 +93,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(75, 73);
+            this.label1.Location = new System.Drawing.Point(57, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 16);
             this.label1.TabIndex = 145;
@@ -142,9 +101,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 100);
+            this.textBox1.Location = new System.Drawing.Point(60, 100);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(173, 22);
+            this.textBox1.Size = new System.Drawing.Size(392, 22);
             this.textBox1.TabIndex = 144;
             // 
             // btnSearch
@@ -158,7 +117,7 @@
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.Black;
             this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearch.Location = new System.Drawing.Point(759, 89);
+            this.btnSearch.Location = new System.Drawing.Point(595, 89);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(164, 33);
@@ -166,16 +125,6 @@
             this.btnSearch.Text = "Buscar ";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // dtpfecha1
-            // 
-            this.dtpfecha1.CustomFormat = "";
-            this.dtpfecha1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpfecha1.Location = new System.Drawing.Point(469, 99);
-            this.dtpfecha1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpfecha1.Name = "dtpfecha1";
-            this.dtpfecha1.Size = new System.Drawing.Size(121, 22);
-            this.dtpfecha1.TabIndex = 140;
             // 
             // btnPrint
             // 
@@ -187,7 +136,7 @@
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.Black;
             this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrint.Location = new System.Drawing.Point(825, 578);
+            this.btnPrint.Location = new System.Drawing.Point(622, 472);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(137, 39);
@@ -196,34 +145,16 @@
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(57, 590);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 16);
-            this.label4.TabIndex = 138;
-            this.label4.Text = "Total Vendido:";
-            // 
-            // txttotalG
-            // 
-            this.txttotalG.Location = new System.Drawing.Point(180, 587);
-            this.txttotalG.Name = "txttotalG";
-            this.txttotalG.ReadOnly = true;
-            this.txttotalG.Size = new System.Drawing.Size(151, 22);
-            this.txttotalG.TabIndex = 137;
-            this.txttotalG.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(404, 18);
+            this.label3.Location = new System.Drawing.Point(262, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(304, 29);
+            this.label3.Size = new System.Drawing.Size(260, 29);
             this.label3.TabIndex = 134;
-            this.label3.Text = "Listado de Reparaciones";
+            this.label3.Text = "Listado de Productos";
             // 
             // dataGridView1
             // 
@@ -240,89 +171,21 @@
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeight = 29;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.cliente,
-            this.tipoDeTrabajo,
+            this.idProducto,
+            this.nombreProducto,
             this.marca,
-            this.modelo,
-            this.averia,
-            this.precio,
-            this.nota,
-            this.fecha});
+            this.cantidad,
+            this.precioC,
+            this.precioV});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(60, 136);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(902, 435);
+            this.dataGridView1.Size = new System.Drawing.Size(699, 314);
             this.dataGridView1.TabIndex = 133;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.Visible = false;
-            this.id.Width = 125;
-            // 
-            // cliente
-            // 
-            this.cliente.HeaderText = "cliente";
-            this.cliente.MinimumWidth = 6;
-            this.cliente.Name = "cliente";
-            this.cliente.Width = 125;
-            // 
-            // tipoDeTrabajo
-            // 
-            this.tipoDeTrabajo.HeaderText = "Tipo de Trabajo";
-            this.tipoDeTrabajo.MinimumWidth = 6;
-            this.tipoDeTrabajo.Name = "tipoDeTrabajo";
-            this.tipoDeTrabajo.Width = 125;
-            // 
-            // marca
-            // 
-            this.marca.HeaderText = "Marca";
-            this.marca.MinimumWidth = 6;
-            this.marca.Name = "marca";
-            this.marca.Width = 125;
-            // 
-            // modelo
-            // 
-            this.modelo.HeaderText = "Modelo";
-            this.modelo.MinimumWidth = 6;
-            this.modelo.Name = "modelo";
-            this.modelo.Width = 125;
-            // 
-            // averia
-            // 
-            this.averia.HeaderText = "Averia";
-            this.averia.MinimumWidth = 6;
-            this.averia.Name = "averia";
-            this.averia.Width = 125;
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "Precio";
-            this.precio.MinimumWidth = 6;
-            this.precio.Name = "precio";
-            this.precio.Width = 125;
-            // 
-            // nota
-            // 
-            this.nota.HeaderText = "Nota";
-            this.nota.MinimumWidth = 10;
-            this.nota.Name = "nota";
-            this.nota.Visible = false;
-            this.nota.Width = 135;
-            // 
-            // fecha
-            // 
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.MinimumWidth = 6;
-            this.fecha.Name = "fecha";
-            this.fecha.Width = 125;
             // 
             // lblDir
             // 
@@ -348,70 +211,89 @@
             this.lblLogo.Text = "logo";
             this.lblLogo.Visible = false;
             // 
-            // cbtipo
+            // button1
             // 
-            this.cbtipo.BackColor = System.Drawing.Color.White;
-            this.cbtipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbtipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbtipo.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.cbtipo.FormattingEnabled = true;
-            this.cbtipo.Location = new System.Drawing.Point(274, 98);
-            this.cbtipo.Margin = new System.Windows.Forms.Padding(4);
-            this.cbtipo.Name = "cbtipo";
-            this.cbtipo.Size = new System.Drawing.Size(173, 24);
-            this.cbtipo.TabIndex = 153;
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(323, 472);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(140, 40);
+            this.button1.TabIndex = 153;
+            this.button1.Text = "Nuevo";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label11
+            // idProducto
             // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(271, 73);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(126, 16);
-            this.label11.TabIndex = 154;
-            this.label11.Text = "Por Tipo de trabajo:";
+            this.idProducto.HeaderText = "ID";
+            this.idProducto.MinimumWidth = 6;
+            this.idProducto.Name = "idProducto";
+            this.idProducto.Width = 125;
             // 
-            // label2
+            // nombreProducto
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(158, 590);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 18);
-            this.label2.TabIndex = 159;
-            this.label2.Text = "$";
+            this.nombreProducto.HeaderText = "Nombre ";
+            this.nombreProducto.MinimumWidth = 6;
+            this.nombreProducto.Name = "nombreProducto";
+            this.nombreProducto.Width = 125;
             // 
-            // ListForm
+            // marca
+            // 
+            this.marca.HeaderText = "Marca";
+            this.marca.MinimumWidth = 6;
+            this.marca.Name = "marca";
+            this.marca.Width = 125;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.MinimumWidth = 6;
+            this.cantidad.Name = "cantidad";
+            this.cantidad.Width = 125;
+            // 
+            // precioC
+            // 
+            this.precioC.HeaderText = "Precio Compra";
+            this.precioC.MinimumWidth = 6;
+            this.precioC.Name = "precioC";
+            this.precioC.Visible = false;
+            this.precioC.Width = 125;
+            // 
+            // precioV
+            // 
+            this.precioV.HeaderText = "Precio Venta";
+            this.precioV.MinimumWidth = 10;
+            this.precioV.Name = "precioV";
+            this.precioV.Width = 135;
+            // 
+            // ListProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Lavender;
-            this.ClientSize = new System.Drawing.Size(1069, 647);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cbtipo);
-            this.Controls.Add(this.label11);
+            this.ClientSize = new System.Drawing.Size(821, 557);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblDir);
             this.Controls.Add(this.lblLogo);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.dtpfecha2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.dtpfecha1);
             this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txttotalG);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "ListForm";
+            this.Name = "ListProducts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.ListForm_Load);
+            this.Load += new System.EventHandler(this.ListProducts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -419,34 +301,22 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtpfecha2;
         public System.Windows.Forms.Button button2;
         public System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DateTimePicker dtpfecha1;
         public System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txttotalG;
         public System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipoDeTrabajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn averia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nota;
         public System.Windows.Forms.Label lblDir;
         public System.Windows.Forms.Label lblLogo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cbtipo;
-        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioV;
     }
 }

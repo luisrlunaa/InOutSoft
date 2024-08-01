@@ -1,8 +1,11 @@
 ﻿using Capa_de_Presentacion;
+using InOutSoft.Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace InOutSoft
@@ -11,6 +14,7 @@ namespace InOutSoft
     {
         ConnectionCx connectionCx = new ConnectionCx();
         public static HomeForm Instance;
+        public static List<SelectedProducts> selectedProducts;
         public int idreparacion;
         public string descripcion;
         public string cliente;
@@ -27,6 +31,7 @@ namespace InOutSoft
             InitializeComponent();
             connectionCx.connection();
             Instance = this;
+            selectedProducts = new List<SelectedProducts>();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -50,6 +55,9 @@ namespace InOutSoft
         private void btnIn_Click(object sender, System.EventArgs e)
         {
             this.Size = new Size(1130, 670);
+            button4.Visible = false;
+            dgvVenta.Visible = false;
+            dgvVenta.Rows.Clear();
             lblTypeTitle.Text = "Generar Entrada";
             lblType.Text = "Entrada";
             button1.Text = "Guardar";
@@ -60,6 +68,8 @@ namespace InOutSoft
         private void btnOut_Click(object sender, System.EventArgs e)
         {
             this.Size = new Size(1130, 670);
+            button4.Visible = true;
+            dgvVenta.Visible = true;
             lblTypeTitle.Text = "Generar Salida";
             lblType.Text = "Salida";
             button1.Text = "Registrar";
@@ -70,6 +80,7 @@ namespace InOutSoft
         private void HomeForm_Load(object sender, System.EventArgs e)
         {
             llenar();
+
             this.Size = new Size(332, 610);
         }
 
@@ -101,7 +112,7 @@ namespace InOutSoft
                 }
                 else
                 {
-                    using (SqlCommand cmd = new SqlCommand("Registrartaller", connectionCx.sqlConnection))
+                    using (SqlCommand cmd = new SqlCommand("RegistrarTaller", connectionCx.sqlConnection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@id", SqlDbType.Int).Value = idreparacion;
@@ -114,13 +125,59 @@ namespace InOutSoft
                         cmd.Parameters.Add("@precio", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
                         cmd.Parameters.Add("@nota", SqlDbType.NVarChar).Value = txtnota.Text;
 
-                        connectionCx.Connect();
-                        cmd.ExecuteNonQuery();
-                        connectionCx.Disconnect();
+                        try
+                        {
+                            connectionCx.Connect();
+                            cmd.ExecuteNonQuery();
+                            connectionCx.Disconnect();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al guardar registro de taller. \n" + ex);
+                            return;
+                        }
 
                         if (lblType.Text.ToLower() == "salida")
                         {
-                            using (SqlCommand cmd2 = new SqlCommand("pagos_re", connectionCx.sqlConnection))
+                            using (SqlCommand cmd1 = new SqlCommand("RegistrarDetalleTaller", connectionCx.sqlConnection))
+                            {
+                                var priceProductsInList = selectedProducts;
+                                foreach (DataGridViewRow row in dgvVenta.Rows)
+                                {
+                                    connectionCx.Disconnect();
+                                    cmd1.CommandType = CommandType.StoredProcedure;
+
+                                    int idventa = 0;
+                                    int idProduct = Convert.ToInt32(row.Cells["IdProducto"].Value);
+                                    var precio = Convert.ToDouble(row.Cells["PrecioU"].Value);
+                                    var cantidad = Convert.ToDouble(row.Cells["Cantidad"].Value);
+                                    var ganancia = (precio - priceProductsInList?.FirstOrDefault(x => x.idProduct == idProduct)?.Price) * cantidad;
+
+                                    //Tabla detalles
+                                    cmd1.Parameters.Add("@IdTaller", SqlDbType.Int).Value = idventa;
+                                    cmd1.Parameters.Add("@IdProducto", SqlDbType.Int).Value = idProduct;
+                                    cmd1.Parameters.Add("@NombreProducto", SqlDbType.NVarChar).Value = Convert.ToString(row.Cells["NombreProducto"].Value);
+                                    cmd1.Parameters.Add("@Precio", SqlDbType.Float).Value = precio;
+                                    cmd1.Parameters.Add("@Ganancia", SqlDbType.Float).Value = ganancia;
+                                    cmd1.Parameters.Add("@Cantidad", SqlDbType.Float).Value = cantidad;
+                                    cmd1.Parameters.Add("@SubTotal", SqlDbType.Float).Value = Convert.ToDouble(row.Cells["SubtoTal"].Value);
+
+                                    try
+                                    {
+                                        connectionCx.connection();
+                                        cmd1.ExecuteNonQuery();
+                                        cmd1.Parameters.Clear();
+                                        connectionCx.Disconnect();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("Error al guardar los detalles. \n" + ex);
+                                        return;
+                                    }
+                                }
+                            }
+
+                            using (SqlCommand cmd2 = new SqlCommand("RegistrarPago", connectionCx.sqlConnection))
                             {
                                 cmd2.CommandType = CommandType.StoredProcedure;
 
@@ -128,12 +185,21 @@ namespace InOutSoft
                                 cmd2.Parameters.Add("@id", SqlDbType.Int).Value = idreparacion;
                                 cmd2.Parameters.Add("@monto", SqlDbType.Decimal).Value = Convert.ToDecimal(txtprecio.Text);
 
-                                connectionCx.Connect();
-                                cmd2.ExecuteNonQuery();
-                                connectionCx.Disconnect();
+                                try
+                                {
+                                    connectionCx.Connect();
+                                    cmd2.ExecuteNonQuery();
+                                    connectionCx.Disconnect();
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("Error al guardar Pago. \n" + ex);
+                                    return;
+                                }
 
                                 tickEstiloP();
                                 MessageBox.Show("Salida Registrada y Pago Confirmado");
+                                selectedProducts = new List<SelectedProducts>();
                             }
                         }
                         else
@@ -330,11 +396,57 @@ namespace InOutSoft
                 dtpFecha.Text = fecha;
                 txtprecio.Text = precio;
                 txtnota.Text = nota;
-
-
-                // Perform any additional updates needed to refresh the form
-                this.Update();
             }
+
+            if (selectedProducts != null && selectedProducts.Any() && lblType.Text.ToLower() == "salida")
+            {
+                var prod = selectedProducts.LastOrDefault();
+                lblNameP.Text = prod.Name;
+                lblPriceP.Text = prod.PriceV.ToString();
+                txtQuantity.Text = prod.Quantity.ToString();
+
+            }
+
+            // Perform any additional updates needed to refresh the form
+            this.Update();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (selectedProducts != null && selectedProducts.Any() && !string.IsNullOrWhiteSpace(txtQuantity.Text) && Convert.ToDecimal(txtQuantity.Text) > 0)
+            {
+                var prod = selectedProducts.LastOrDefault();
+                var quantity = Convert.ToDouble(selectedProducts?.Where(x => x.idProduct == prod.idProduct && x != prod)?.ToList()?.Sum(y => y.Quantity) + Convert.ToDouble(txtQuantity.Text));
+                prod.Quantity = quantity;
+
+                selectedProducts = selectedProducts.Where(x => x.idProduct != prod.idProduct).ToList();
+                selectedProducts.Add(prod);
+
+                dgvVenta.Rows.Clear();
+                for (int i = 0; i < selectedProducts.Count; i++)
+                {
+                    dgvVenta.Rows.Add();
+                    dgvVenta.Rows[i].Cells["IdProducto"].Value = selectedProducts[i].idProduct;
+                    dgvVenta.Rows[i].Cells["NombreProducto"].Value = selectedProducts[i].Name;
+                    dgvVenta.Rows[i].Cells["Cantidad"].Value = selectedProducts[i].Quantity;
+                    dgvVenta.Rows[i].Cells["PrecioU"].Value = selectedProducts[i].PriceV;
+                    dgvVenta.Rows[i].Cells["SubtoTal"].Value = (selectedProducts[i].Quantity * selectedProducts[i].PriceV);
+                }
+
+                lblNameP.Text = "...";
+                lblPriceP.Text = "...";
+                txtQuantity.Clear();
+            }
+            else
+                MessageBox.Show("Seleccione un producto del listado para poder agregar");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ListProducts F = new ListProducts();
+            F.lblLogo.Text = lblLogo.Text;
+            F.lblDir.Text = lblDir.Text;
+            F.Show();
         }
     }
 }
