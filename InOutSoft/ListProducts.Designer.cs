@@ -44,8 +44,8 @@
             this.nombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,12 +175,12 @@
             this.nombreProducto,
             this.marca,
             this.cantidad,
-            this.precioC,
-            this.precioV});
+            this.precioV,
+            this.precioC});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(60, 136);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(699, 314);
             this.dataGridView1.TabIndex = 133;
@@ -236,7 +236,7 @@
             this.idProducto.HeaderText = "ID";
             this.idProducto.MinimumWidth = 6;
             this.idProducto.Name = "idProducto";
-            this.idProducto.Width = 125;
+            this.idProducto.Width = 45;
             // 
             // nombreProducto
             // 
@@ -257,15 +257,6 @@
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.MinimumWidth = 6;
             this.cantidad.Name = "cantidad";
-            this.cantidad.Width = 125;
-            // 
-            // precioC
-            // 
-            this.precioC.HeaderText = "Precio Compra";
-            this.precioC.MinimumWidth = 6;
-            this.precioC.Name = "precioC";
-            this.precioC.Visible = false;
-            this.precioC.Width = 125;
             // 
             // precioV
             // 
@@ -273,6 +264,13 @@
             this.precioV.MinimumWidth = 10;
             this.precioV.Name = "precioV";
             this.precioV.Width = 135;
+            // 
+            // precioC
+            // 
+            this.precioC.HeaderText = "Precio Compra";
+            this.precioC.MinimumWidth = 6;
+            this.precioC.Name = "precioC";
+            this.precioC.Width = 125;
             // 
             // ListProducts
             // 
@@ -308,15 +306,15 @@
         private System.Windows.Forms.Button btnSearch;
         public System.Windows.Forms.Button btnPrint;
         public System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.Label lblDir;
         public System.Windows.Forms.Label lblLogo;
         public System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precioC;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioC;
     }
 }

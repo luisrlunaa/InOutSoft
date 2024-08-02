@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -26,6 +27,9 @@ namespace InOutSoft
         public string precio;
         public string nota;
 
+        public string WindUser;
+        public string SqlFolder;
+
         public HomeForm()
         {
             InitializeComponent();
@@ -36,7 +40,7 @@ namespace InOutSoft
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Size = new Size(332, 610);
+            this.Size = new Size(325, 600);
             ListForm F = new ListForm();
             F.lblLogo.Text = lblLogo.Text;
             F.lblDir.Text = lblDir.Text;
@@ -45,7 +49,7 @@ namespace InOutSoft
 
         private void btnList_Click(object sender, System.EventArgs e)
         {
-            this.Size = new Size(332, 610);
+            this.Size = new Size(325, 600);
             ListForm F = new ListForm();
             F.lblLogo.Text = lblLogo.Text;
             F.lblDir.Text = lblDir.Text;
@@ -54,7 +58,7 @@ namespace InOutSoft
 
         private void btnIn_Click(object sender, System.EventArgs e)
         {
-            this.Size = new Size(1130, 670);
+            this.Size = new Size(900, 600);
             button4.Visible = false;
             dgvVenta.Visible = false;
             dgvVenta.Rows.Clear();
@@ -67,7 +71,7 @@ namespace InOutSoft
 
         private void btnOut_Click(object sender, System.EventArgs e)
         {
-            this.Size = new Size(1130, 670);
+            this.Size = new Size(900, 600);
             button4.Visible = true;
             dgvVenta.Visible = true;
             lblTypeTitle.Text = "Generar Salida";
@@ -81,7 +85,7 @@ namespace InOutSoft
         {
             llenar();
 
-            this.Size = new Size(332, 610);
+            this.Size = new Size(325, 600);
         }
 
         private void timer1_Tick(object sender, System.EventArgs e)
@@ -295,6 +299,8 @@ namespace InOutSoft
                 lblTel2.Text = leer["Tel2"].ToString() ?? string.Empty;
                 lblrnc.Text = leer["RNC"].ToString() ?? string.Empty;
                 var impresoraPeq = leer["ImpresoraPeq"].ToString();
+                WindUser = leer["WindowsUserName"].ToString() ?? string.Empty;
+                SqlFolder = leer["SqlFolderName"].ToString() ?? string.Empty;
                 Program.ImpressionPeq = string.IsNullOrWhiteSpace(impresoraPeq) ? "POS80 Printer" : impresoraPeq;
             }
             connectionCx.Disconnect();
@@ -302,7 +308,7 @@ namespace InOutSoft
 
         private void btnPay_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(332, 610);
+            this.Size = new Size(325, 600);
             PayListForm F = new PayListForm();
             F.lblLogo.Text = lblLogo.Text;
             F.lblDir.Text = lblDir.Text;
@@ -372,7 +378,7 @@ namespace InOutSoft
         {
             if (idreparacion > 0)
             {
-                this.Size = new Size(1130, 670);
+                this.Size = new Size(900, 600);
                 lblTypeTitle.Text = "Generar Salida";
                 lblType.Text = "Salida";
                 button1.Text = "Registrar";
@@ -447,6 +453,83 @@ namespace InOutSoft
             F.lblLogo.Text = lblLogo.Text;
             F.lblDir.Text = lblDir.Text;
             F.Show();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            var dbName = connectionCx.sqlConnection.Database;
+            var dirs = new DirectoryInfo(@"" + SqlFolder).FullName;
+            string fileName = "_" + dbName + "_" + DateTime.Now.ToShortDateString().Replace("/", "-") + ".bak";
+            ReintentBackup(dbName, dirs, fileName);
+        }
+
+        private void ReintentBackup(string dbName, string dirs, string fileName)
+        {
+            bool continueLoop = true;
+
+            while (continueLoop)
+            {
+                try
+                {
+                    var (save, message) = MakeBackup(dirs, connectionCx.connectionString, dbName, fileName);
+                    if (save)
+                    {
+                        var destination = @"" + WindUser + "\\" + fileName;
+                        if (File.Exists(destination))
+                        {
+                            File.Delete(destination);
+                        }
+
+                        File.Move(dirs + "\\" + fileName, destination);
+                        MessageBox.Show("Copia de seguridad de base de datos realizado y guardado");
+                        continueLoop = false;
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al realizar la Copia de seguridad de base de datos");
+                        DialogResult result = MessageBox.Show("¿Desea intentar nuevamente guardar la copia de seguridad?", "Sistema de Ventas", MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.No)
+                        {
+                            continueLoop = false;
+                            // Exit the application if the user chooses not to continue
+                            Application.Exit();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    DialogResult result = MessageBox.Show("¿Desea intentar nuevamente guardar la copia de seguridad?", "Sistema de Ventas", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.No)
+                    {
+                        continueLoop = false;
+                        // Exit the application if the user chooses not to continue
+                        Application.Exit();
+                    }
+                }
+            }
+        }
+
+        public (bool success, string message) MakeBackup(string ubicacion, string strConnection, string dbName, string nombre)
+        {
+            var con = new SqlConnection(strConnection);
+            var cmd = new SqlCommand("BACKUP DATABASE " + dbName + " TO DISK='" + ubicacion + "/" + nombre + "'", con);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return (true, "Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                con.Close();
+                return (false, ex.Message.ToString());
+            }
         }
     }
 }
